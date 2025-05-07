@@ -19,19 +19,19 @@ public class PaymentController {
     public List<Payment> getAll() {
         return paymentService.findAll();
     }
-
+    //Metodo Get para payments
     @GetMapping("/{id}")
     public ResponseEntity<Payment> getById(@PathVariable Long id) {
         return paymentService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    //metodo post para payments
     @PostMapping
     public Payment create(@RequestBody Payment payment) {
         return paymentService.create(payment);
     }
-
+    //metodo put para payments
     @PutMapping("/{id}")
     public ResponseEntity<Payment> update(
             @PathVariable Long id,
