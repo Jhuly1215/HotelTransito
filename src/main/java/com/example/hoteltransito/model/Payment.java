@@ -1,7 +1,5 @@
 package com.example.hoteltransito.model;
-
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
