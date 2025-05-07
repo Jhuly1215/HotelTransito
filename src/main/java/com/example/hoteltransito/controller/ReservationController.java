@@ -14,7 +14,7 @@ public class ReservationController {
 
     @Autowired
     private ReservationService reservationService;
-
+    //metodo get para reservations
     @GetMapping
     public List<Reservation> getAll() {
         return reservationService.findAll();
@@ -26,12 +26,12 @@ public class ReservationController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    //metodo post para reservations
     @PostMapping
     public Reservation create(@RequestBody Reservation reservation) {
         return reservationService.create(reservation);
     }
-
+    //metodo put para reservations
     @PutMapping("/{id}")
     public ResponseEntity<Reservation> update(
             @PathVariable Long id,
@@ -41,7 +41,7 @@ public class ReservationController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    //metodo delete para reservations
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (reservationService.delete(id)) {
