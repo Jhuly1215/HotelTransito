@@ -10,19 +10,19 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;/*id del usuario*/
 
     @Column(nullable = false, unique = true, length = 50)
-    private String username;
+    private String username;/*username del usuario*/
 
     @Column(nullable = false, unique = true, length = 100)
-    private String email;
+    private String email;/*correo del usuario*/
 
     @Column(name = "password_hash", nullable = false, length = 255)
-    private String passwordHash;
+    private String passwordHash;/*contraseña cifrada del usuario*/
 
     @Column(name = "full_name", length = 150)
-    private String fullName;
+    private String fullName;/*nombre completo del usuario*/
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

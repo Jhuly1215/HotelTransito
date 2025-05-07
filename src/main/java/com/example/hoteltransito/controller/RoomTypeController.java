@@ -14,13 +14,13 @@ public class RoomTypeController {
     @Autowired
     private RoomTypeService roomTypeService;
 
-    /** List all room types */
+    /** List all room types, listar tipos de cuarto*/
     @GetMapping
     public List<RoomType> getAll() {
         return roomTypeService.findAll();
     }
 
-    /** Get a single room type by ID */
+    /** Get a single room type by ID, get id de un cuarto*/
     @GetMapping("/{id}")
     public ResponseEntity<RoomType> getById(@PathVariable Long id) {
         return roomTypeService.findById(id)
@@ -28,13 +28,13 @@ public class RoomTypeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    /** Create a new room type */
+    /** Create a new room type, crear nuevo cuarto */
     @PostMapping
     public RoomType create(@RequestBody RoomType roomType) {
         return roomTypeService.create(roomType);
     }
 
-    /** Update an existing room type */
+    /** Update an existing room type, actualizar un cuarto existente*/
     @PutMapping("/{id}")
     public ResponseEntity<RoomType> update(
             @PathVariable Long id,
@@ -45,7 +45,7 @@ public class RoomTypeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    /** Delete a room type */
+    /** Delete a room type, borrar tipo de cuarto*/
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (roomTypeService.delete(id)) {

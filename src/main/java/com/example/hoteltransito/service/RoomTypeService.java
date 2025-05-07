@@ -26,14 +26,14 @@ public class RoomTypeService {
     }
 
     /**
-     * Recupera un tipo de habitación por su ID.
+     * Recupera un tipo de habitación por su ID
      */
     public Optional<RoomType> findById(Long id) {
         return roomTypeRepository.findById(id);
     }
 
     /**
-     * Crea un nuevo tipo de habitación.
+     * Crea un nuevo tipo de habitación
      */
     @Transactional
     public RoomType create(RoomType roomType) {
