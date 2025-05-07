@@ -5,8 +5,14 @@ pipeline {
         githubPush()
     }
 
+    environment {
+        WAR_FILE = 'target/HotelTransito.war'
+        DEPLOY_PATH = '/usr/local/tomcat/webapps/HotelTransito.war'
+        TOMCAT_CONTAINER = 'hoteltransito-tomcat-1' // Reemplaza si tu contenedor Tomcat tiene otro nombre
+    }
+
     stages {
-        stage('Clonar repositorio') {
+        stage('Checkout') {
             steps {
                 git url: 'https://github.com/Jhuly1215/HotelTransito.git',
                     branch: 'jhuls',
@@ -14,31 +20,32 @@ pipeline {
             }
         }
 
-        stage('Compilar proyecto') {
+        stage('Build') {
             steps {
                 sh 'mvn clean compile'
-            }
-        }
-
-        stage('Test') {
-            steps {
                 sh 'mvn test'
+                sh 'mvn package'
             }
         }
 
-        stage('Empaquetar') {
+        stage('Deploy') {
             steps {
-                sh 'mvn package'
+                script {
+                    echo "🔄 Copiando .war al contenedor Tomcat..."
+                    sh "docker cp ${WAR_FILE} ${TOMCAT_CONTAINER}:${DEPLOY_PATH}"
+                    echo "♻️ Reiniciando Tomcat..."
+                    sh "docker restart ${TOMCAT_CONTAINER}"
+                }
             }
         }
     }
 
     post {
         success {
-            echo '✅ Build exitoso tras push a GitHub.'
+            echo '✅ Build y despliegue exitoso tras push a GitHub.'
         }
         failure {
-            echo '❌ El build falló tras el push.'
+            echo '❌ El build o despliegue falló.'
         }
     }
 }

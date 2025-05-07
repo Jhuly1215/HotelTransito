@@ -30,6 +30,13 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+  tomcat:
+    image: tomcat:9.0
+    ports:
+      - "8081:8080"  # Usa un puerto libre
+    volumes:
+      - ./target/HotelTransito.war:/usr/local/tomcat/webapps/HotelTransito.war
 
 volumes:
   jenkins_home:
+
